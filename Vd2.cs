@@ -1,300 +1,131 @@
-// BadSchoolProgram.cs
-// Chương trình quản lý trường học bằng C# cực kỳ BAD CODE
-// Gồm: Sinh viên, Giáo viên, Môn học, Đăng ký, Điểm
-// Tất cả lưu bằng List<string> kiểu "id|field1|field2|..."
+// BadSchoolProgram.cs (tiếp tục sau phần Teacher Manager)
 
-using System;
-using System.Collections.Generic;
-
-public class BadSchoolProgram
+    // ================== QUẢN LÝ MÔN HỌC ==================
+else if (menu == 3)
 {
-    public static void Main(string[] args)
+    int smenu = 0;
+    while (smenu != 9)
     {
-        List<string> students = new List<string>();
-        List<string> teachers = new List<string>();
-        List<string> courses = new List<string>();
-        List<string> enrollments = new List<string>();
-        List<string> grades = new List<string>();
+        Console.WriteLine("--- QUAN LY MON HOC ---");
+        Console.WriteLine("1. Them mon hoc");
+        Console.WriteLine("2. Xoa mon hoc");
+        Console.WriteLine("3. Cap nhat mon hoc");
+        Console.WriteLine("4. Hien thi tat ca mon hoc");
+        Console.WriteLine("5. Tim mon hoc theo ten");
+        Console.WriteLine("6. Tim mon hoc theo so tin chi > 3");
+        Console.WriteLine("7. Sap xep theo ten");
+        Console.WriteLine("8. Sap xep theo so tin chi");
+        Console.WriteLine("9. Quay lai");
+        smenu = int.Parse(Console.ReadLine());
 
-        int menu = 0;
-        while (menu != 99)
+        if (smenu == 1)
         {
-            Console.WriteLine("============= MENU CHINH =============");
-            Console.WriteLine("1. Quan ly Sinh vien");
-            Console.WriteLine("2. Quan ly Giao vien");
-            Console.WriteLine("3. Quan ly Mon hoc");
-            Console.WriteLine("4. Quan ly Dang ky hoc");
-            Console.WriteLine("5. Quan ly Diem");
-            Console.WriteLine("6. Bao cao tong hop");
-            Console.WriteLine("99. Thoat");
-            Console.Write("Nhap lua chon: ");
-            menu = int.Parse(Console.ReadLine());
-
-            // ================== QUẢN LÝ SINH VIÊN ==================
-            if (menu == 1)
+            Console.Write("Nhap id: ");
+            string id = Console.ReadLine();
+            Console.Write("Nhap ten: ");
+            string name = Console.ReadLine();
+            Console.Write("Nhap so tin chi: ");
+            int credits = int.Parse(Console.ReadLine());
+            courses.Add(id + "|" + name + "|" + credits);
+        }
+        else if (smenu == 2)
+        {
+            Console.Write("Nhap id can xoa: ");
+            string id = Console.ReadLine();
+            for (int i = 0; i < courses.Count; i++)
             {
-                int smenu = 0;
-                while (smenu != 9)
+                string[] parts = courses[i].Split('|');
+                if (parts[0] == id)
                 {
-                    Console.WriteLine("--- QUAN LY SINH VIEN ---");
-                    Console.WriteLine("1. Them SV");
-                    Console.WriteLine("2. Xoa SV");
-                    Console.WriteLine("3. Cap nhat SV");
-                    Console.WriteLine("4. Hien thi tat ca SV");
-                    Console.WriteLine("5. Tim SV theo ten");
-                    Console.WriteLine("6. Tim SV GPA > 8");
-                    Console.WriteLine("7. Sap xep theo ten");
-                    Console.WriteLine("8. Sap xep theo GPA");
-                    Console.WriteLine("9. Quay lai");
-                    smenu = int.Parse(Console.ReadLine());
-
-                    if (smenu == 1)
+                    courses.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        else if (smenu == 3)
+        {
+            Console.Write("Nhap id can cap nhat: ");
+            string id = Console.ReadLine();
+            for (int i = 0; i < courses.Count; i++)
+            {
+                string[] parts = courses[i].Split('|');
+                if (parts[0] == id)
+                {
+                    Console.Write("Nhap ten moi: ");
+                    string name = Console.ReadLine();
+                    Console.Write("Nhap so tin chi moi: ");
+                    int credits = int.Parse(Console.ReadLine());
+                    courses[i] = id + "|" + name + "|" + credits;
+                }
+            }
+        }
+        else if (smenu == 4)
+        {
+            foreach (var c in courses)
+            {
+                string[] p = c.Split('|');
+                Console.WriteLine("ID:" + p[0] + " Name:" + p[1] + " Credits:" + p[2]);
+            }
+        }
+        else if (smenu == 5)
+        {
+            Console.Write("Nhap ten: ");
+            string name = Console.ReadLine();
+            foreach (var c in courses)
+            {
+                string[] p = c.Split('|');
+                if (p[1] == name)
+                {
+                    Console.WriteLine("Tim thay: " + c);
+                }
+            }
+        }
+        else if (smenu == 6)
+        {
+            foreach (var c in courses)
+            {
+                string[] p = c.Split('|');
+                if (int.Parse(p[2]) > 3)
+                {
+                    Console.WriteLine("Mon nhieu tin chi: " + c);
+                }
+            }
+        }
+        else if (smenu == 7)
+        {
+            for (int i = 0; i < courses.Count; i++)
+            {
+                for (int j = 0; j < courses.Count - 1; j++)
+                {
+                    string[] p1 = courses[j].Split('|');
+                    string[] p2 = courses[j + 1].Split('|');
+                    if (p1[1].CompareTo(p2[1]) > 0)
                     {
-                        Console.Write("Nhap id: ");
-                        string id = Console.ReadLine();
-                        Console.Write("Nhap ten: ");
-                        string name = Console.ReadLine();
-                        Console.Write("Nhap tuoi: ");
-                        int age = int.Parse(Console.ReadLine());
-                        Console.Write("Nhap GPA: ");
-                        double gpa = double.Parse(Console.ReadLine());
-                        students.Add(id + "|" + name + "|" + age + "|" + gpa);
-                    }
-                    else if (smenu == 2)
-                    {
-                        Console.Write("Nhap id can xoa: ");
-                        string id = Console.ReadLine();
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            string[] parts = students[i].Split('|');
-                            if (parts[0] == id)
-                            {
-                                students.RemoveAt(i);
-                                break;
-                            }
-                        }
-                    }
-                    else if (smenu == 3)
-                    {
-                        Console.Write("Nhap id can cap nhat: ");
-                        string id = Console.ReadLine();
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            string[] parts = students[i].Split('|');
-                            if (parts[0] == id)
-                            {
-                                Console.Write("Nhap ten moi: ");
-                                string name = Console.ReadLine();
-                                Console.Write("Nhap tuoi moi: ");
-                                int age = int.Parse(Console.ReadLine());
-                                Console.Write("Nhap GPA moi: ");
-                                double gpa = double.Parse(Console.ReadLine());
-                                students[i] = id + "|" + name + "|" + age + "|" + gpa;
-                            }
-                        }
-                    }
-                    else if (smenu == 4)
-                    {
-                        foreach (var s in students)
-                        {
-                            string[] p = s.Split('|');
-                            Console.WriteLine("ID:" + p[0] + " Name:" + p[1] + " Age:" + p[2] + " GPA:" + p[3]);
-                        }
-                    }
-                    else if (smenu == 5)
-                    {
-                        Console.Write("Nhap ten: ");
-                        string name = Console.ReadLine();
-                        foreach (var s in students)
-                        {
-                            string[] p = s.Split('|');
-                            if (p[1] == name)
-                            {
-                                Console.WriteLine("Tim thay: " + s);
-                            }
-                        }
-                    }
-                    else if (smenu == 6)
-                    {
-                        foreach (var s in students)
-                        {
-                            string[] p = s.Split('|');
-                            if (double.Parse(p[3]) > 8.0)
-                            {
-                                Console.WriteLine("Sinh vien gioi: " + s);
-                            }
-                        }
-                    }
-                    else if (smenu == 7)
-                    {
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            for (int j = 0; j < students.Count - 1; j++)
-                            {
-                                string[] p1 = students[j].Split('|');
-                                string[] p2 = students[j + 1].Split('|');
-                                if (p1[1].CompareTo(p2[1]) > 0)
-                                {
-                                    string tmp = students[j];
-                                    students[j] = students[j + 1];
-                                    students[j + 1] = tmp;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Da sap xep theo ten.");
-                    }
-                    else if (smenu == 8)
-                    {
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            for (int j = 0; j < students.Count - 1; j++)
-                            {
-                                string[] p1 = students[j].Split('|');
-                                string[] p2 = students[j + 1].Split('|');
-                                if (double.Parse(p1[3]) < double.Parse(p2[3]))
-                                {
-                                    string tmp = students[j];
-                                    students[j] = students[j + 1];
-                                    students[j + 1] = tmp;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Da sap xep theo GPA.");
+                        string tmp = courses[j];
+                        courses[j] = courses[j + 1];
+                        courses[j + 1] = tmp;
                     }
                 }
             }
-
-            // ================== QUẢN LÝ GIÁO VIÊN ==================
-            else if (menu == 2)
+            Console.WriteLine("Da sap xep theo ten.");
+        }
+        else if (smenu == 8)
+        {
+            for (int i = 0; i < courses.Count; i++)
             {
-                int smenu = 0;
-                while (smenu != 9)
+                for (int j = 0; j < courses.Count - 1; j++)
                 {
-                    Console.WriteLine("--- QUAN LY GIAO VIEN ---");
-                    Console.WriteLine("1. Them GV");
-                    Console.WriteLine("2. Xoa GV");
-                    Console.WriteLine("3. Cap nhat GV");
-                    Console.WriteLine("4. Hien thi tat ca GV");
-                    Console.WriteLine("5. Tim GV theo ten");
-                    Console.WriteLine("6. Tim GV theo chuyen mon");
-                    Console.WriteLine("7. Sap xep theo ten");
-                    Console.WriteLine("8. Sap xep theo chuyen mon");
-                    Console.WriteLine("9. Quay lai");
-                    smenu = int.Parse(Console.ReadLine());
-
-                    if (smenu == 1)
+                    string[] p1 = courses[j].Split('|');
+                    string[] p2 = courses[j + 1].Split('|');
+                    if (int.Parse(p1[2]) < int.Parse(p2[2]))
                     {
-                        Console.Write("Nhap id: ");
-                        string id = Console.ReadLine();
-                        Console.Write("Nhap ten: ");
-                        string name = Console.ReadLine();
-                        Console.Write("Nhap chuyen mon: ");
-                        string major = Console.ReadLine();
-                        teachers.Add(id + "|" + name + "|" + major);
-                    }
-                    else if (smenu == 2)
-                    {
-                        Console.Write("Nhap id can xoa: ");
-                        string id = Console.ReadLine();
-                        for (int i = 0; i < teachers.Count; i++)
-                        {
-                            string[] parts = teachers[i].Split('|');
-                            if (parts[0] == id)
-                            {
-                                teachers.RemoveAt(i);
-                                break;
-                            }
-                        }
-                    }
-                    else if (smenu == 3)
-                    {
-                        Console.Write("Nhap id can cap nhat: ");
-                        string id = Console.ReadLine();
-                        for (int i = 0; i < teachers.Count; i++)
-                        {
-                            string[] parts = teachers[i].Split('|');
-                            if (parts[0] == id)
-                            {
-                                Console.Write("Nhap ten moi: ");
-                                string name = Console.ReadLine();
-                                Console.Write("Nhap chuyen mon moi: ");
-                                string major = Console.ReadLine();
-                                teachers[i] = id + "|" + name + "|" + major;
-                            }
-                        }
-                    }
-                    else if (smenu == 4)
-                    {
-                        foreach (var t in teachers)
-                        {
-                            string[] p = t.Split('|');
-                            Console.WriteLine("ID:" + p[0] + " Name:" + p[1] + " Major:" + p[2]);
-                        }
-                    }
-                    else if (smenu == 5)
-                    {
-                        Console.Write("Nhap ten: ");
-                        string name = Console.ReadLine();
-                        foreach (var t in teachers)
-                        {
-                            string[] p = t.Split('|');
-                            if (p[1] == name)
-                            {
-                                Console.WriteLine("Tim thay: " + t);
-                            }
-                        }
-                    }
-                    else if (smenu == 6)
-                    {
-                        Console.Write("Nhap chuyen mon: ");
-                        string major = Console.ReadLine();
-                        foreach (var t in teachers)
-                        {
-                            string[] p = t.Split('|');
-                            if (p[2] == major)
-                            {
-                                Console.WriteLine("Tim thay: " + t);
-                            }
-                        }
-                    }
-                    else if (smenu == 7)
-                    {
-                        for (int i = 0; i < teachers.Count; i++)
-                        {
-                            for (int j = 0; j < teachers.Count - 1; j++)
-                            {
-                                string[] p1 = teachers[j].Split('|');
-                                string[] p2 = teachers[j + 1].Split('|');
-                                if (p1[1].CompareTo(p2[1]) > 0)
-                                {
-                                    string tmp = teachers[j];
-                                    teachers[j] = teachers[j + 1];
-                                    teachers[j + 1] = tmp;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Da sap xep theo ten.");
-                    }
-                    else if (smenu == 8)
-                    {
-                        for (int i = 0; i < teachers.Count; i++)
-                        {
-                            for (int j = 0; j < teachers.Count - 1; j++)
-                            {
-                                string[] p1 = teachers[j].Split('|');
-                                string[] p2 = teachers[j + 1].Split('|');
-                                if (p1[2].CompareTo(p2[2]) > 0)
-                                {
-                                    string tmp = teachers[j];
-                                    teachers[j] = teachers[j + 1];
-                                    teachers[j + 1] = tmp;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Da sap xep theo chuyen mon.");
+                        string tmp = courses[j];
+                        courses[j] = courses[j + 1];
+                        courses[j + 1] = tmp;
                     }
                 }
             }
+            Console.WriteLine("Da sap xep theo so tin chi.");
         }
     }
 }
