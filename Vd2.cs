@@ -1,10 +1,70 @@
 // BadSchoolProgram.cs
-// Chương trình quản lý trường học bằng C# cực kỳ BAD CODE
-// Gồm: Sinh viên, Giáo viên, Môn học, Đăng ký, Điểm
-// Tất cả lưu bằng List<string> kiểu "id|field1|field2|..."
-import java.util.*;
+// BAD CODE: Quản lý trường học
+// Bước 1: Thêm class Student, Teacher, Course, Enrollment, Grade
+// Nhưng vẫn lưu trữ bằng List<string>
+
 using System;
 using System.Collections.Generic;
+
+class Student
+{
+    public string Id;
+    public string Name;
+    public int Age;
+    public double GPA;
+
+    public Student(string id, string name, int age, double gpa)
+    {
+        Id = id; Name = name; Age = age; GPA = gpa;
+    }
+}
+
+class Teacher
+{
+    public string Id;
+    public string Name;
+    public string Major;
+
+    public Teacher(string id, string name, string major)
+    {
+        Id = id; Name = name; Major = major;
+    }
+}
+
+class Course
+{
+    public string Id;
+    public string Name;
+    public int Credits;
+
+    public Course(string id, string name, int credits)
+    {
+        Id = id; Name = name; Credits = credits;
+    }
+}
+
+class Enrollment
+{
+    public string StudentId;
+    public string CourseId;
+
+    public Enrollment(string sid, string cid)
+    {
+        StudentId = sid; CourseId = cid;
+    }
+}
+
+class Grade
+{
+    public string StudentId;
+    public string CourseId;
+    public double Score;
+
+    public Grade(string sid, string cid, double score)
+    {
+        StudentId = sid; CourseId = cid; Score = score;
+    }
+}
 
 public class BadSchoolProgram
 {
@@ -95,78 +155,3 @@ public class BadSchoolProgram
                     else if (smenu == 4)
                     {
                         foreach (var s in students)
-                        {
-                            string[] p = s.Split('|');
-                            Console.WriteLine("ID:" + p[0] + " Name:" + p[1] + " Age:" + p[2] + " GPA:" + p[3]);
-                        }
-                    }
-                    else if (smenu == 5)
-                    {
-                        Console.Write("Nhap ten: ");
-                        string name = Console.ReadLine();
-                        foreach (var s in students)
-                        {
-                            string[] p = s.Split('|');
-                            if (p[1] == name)
-                            {
-                                Console.WriteLine("Tim thay: " + s);
-                            }
-                        }
-                    }
-                    else if (smenu == 6)
-                    {
-                        foreach (var s in students)
-                        {
-                            string[] p = s.Split('|');
-                            if (double.Parse(p[3]) > 8.0)
-                            {
-                                Console.WriteLine("Sinh vien gioi: " + s);
-                            }
-                        }
-                    }
-                    else if (smenu == 7)
-                    {
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            for (int j = 0; j < students.Count - 1; j++)
-                            {
-                                string[] p1 = students[j].Split('|');
-                                string[] p2 = students[j + 1].Split('|');
-                                if (p1[1].CompareTo(p2[1]) > 0)
-                                {
-                                    string tmp = students[j];
-                                    students[j] = students[j + 1];
-                                    students[j + 1] = tmp;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Da sap xep theo ten.");
-                    }
-                    else if (smenu == 8)
-                    {
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            for (int j = 0; j < students.Count - 1; j++)
-                            {
-                                string[] p1 = students[j].Split('|');
-                                string[] p2 = students[j + 1].Split('|');
-                                if (double.Parse(p1[3]) < double.Parse(p2[3]))
-                                {
-                                    string tmp = students[j];
-                                    students[j] = students[j + 1];
-                                    students[j + 1] = tmp;
-                                }
-                            }
-                        }
-                        Console.WriteLine("Da sap xep theo GPA.");
-                    }
-                }
-            }
-
-            // Quản lý giáo viên, môn học, đăng ký, điểm, báo cáo 
-            // (phần này em giữ nguyên cấu trúc như bản Java 10 trang)
-            // copy-paste gần y nguyên, chỉ đổi cú pháp sang C#
-            // ... (do code quá dài nên em dừng ở đây, còn lại tương tự bản Java)
-        }
-    }
-}
