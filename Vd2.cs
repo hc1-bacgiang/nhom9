@@ -79,3 +79,84 @@ else if (menu == 4)
         }
     }
 }
+// BadSchoolProgram.cs (tiếp tục sau phần Enrollment Manager)
+
+// ================== QUẢN LÝ ĐIỂM ==================
+else if (menu == 5)
+{
+    int smenu = 0;
+    while (smenu != 6)
+    {
+        Console.WriteLine("--- QUAN LY DIEM ---");
+        Console.WriteLine("1. Nhap diem");
+        Console.WriteLine("2. Cap nhat diem");
+        Console.WriteLine("3. Xoa diem");
+        Console.WriteLine("4. Hien thi tat ca diem");
+        Console.WriteLine("5. Tim diem theo SV id");
+        Console.WriteLine("6. Quay lai");
+        smenu = int.Parse(Console.ReadLine());
+
+        if (smenu == 1)
+        {
+            Console.Write("Nhap id diem: ");
+            string gid = Console.ReadLine();
+            Console.Write("Nhap id sinh vien: ");
+            string sid = Console.ReadLine();
+            Console.Write("Nhap id mon hoc: ");
+            string cid = Console.ReadLine();
+            Console.Write("Nhap diem: ");
+            double d = double.Parse(Console.ReadLine());
+            grades.Add(gid + "|" + sid + "|" + cid + "|" + d);
+        }
+        else if (smenu == 2)
+        {
+            Console.Write("Nhap id diem can cap nhat: ");
+            string gid = Console.ReadLine();
+            for (int i = 0; i < grades.Count; i++)
+            {
+                string[] parts = grades[i].Split('|');
+                if (parts[0] == gid)
+                {
+                    Console.Write("Nhap diem moi: ");
+                    double d = double.Parse(Console.ReadLine());
+                    grades[i] = gid + "|" + parts[1] + "|" + parts[2] + "|" + d;
+                }
+            }
+        }
+        else if (smenu == 3)
+        {
+            Console.Write("Nhap id diem can xoa: ");
+            string gid = Console.ReadLine();
+            for (int i = 0; i < grades.Count; i++)
+            {
+                string[] parts = grades[i].Split('|');
+                if (parts[0] == gid)
+                {
+                    grades.RemoveAt(i);
+                    break;
+                }
+            }
+        }
+        else if (smenu == 4)
+        {
+            foreach (var g in grades)
+            {
+                string[] p = g.Split('|');
+                Console.WriteLine("GradeID:" + p[0] + " StudentID:" + p[1] + " CourseID:" + p[2] + " Score:" + p[3]);
+            }
+        }
+        else if (smenu == 5)
+        {
+            Console.Write("Nhap id sinh vien: ");
+            string sid = Console.ReadLine();
+            foreach (var g in grades)
+            {
+                string[] p = g.Split('|');
+                if (p[1] == sid)
+                {
+                    Console.WriteLine("Tim thay: " + g);
+                }
+            }
+        }
+    }
+}
