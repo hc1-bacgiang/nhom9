@@ -1,6 +1,7 @@
 // BƯỚC 1: Thêm class cho từng đối tượng, nhưng vẫn giữ ArrayList<String> BAD CODE
 // Lưu ý: Code này vẫn xài ArrayList<String>, chỉ mới dọn sơ
 import java.util.*;
+import java.io.*;
 
 class Student
 {
