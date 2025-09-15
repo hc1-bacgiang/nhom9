@@ -4,8 +4,9 @@ import java.util.*;
 
 class Student
 {
+
     print("Hello from nhanh2 branch");
-    int id;
+    String id;
     String name;
     int age;
     double gpa;
