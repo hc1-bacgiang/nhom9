@@ -1,9 +1,8 @@
 // BƯỚC 1: Thêm class cho từng đối tượng, nhưng vẫn giữ ArrayList<String> BAD CODE
 // Lưu ý: Code này vẫn xài ArrayList<String>, chỉ mới dọn sơ
 
-test
-import java.util.*;
-vndslkklv
+import java.util;
+
 class Student
 {
 
