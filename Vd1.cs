@@ -5,6 +5,7 @@ import java.util.*;
 
 class Student
 {
+    print("Hello from nhanh1 branch");
     String id;
     String name;
     int age;
@@ -234,4 +235,3 @@ System.out.println("4. Hien thi tat ca SV");
         }
     }
 }
-envgosnosnvs
