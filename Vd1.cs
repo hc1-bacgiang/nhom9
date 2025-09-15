@@ -2,6 +2,7 @@
 // Lưu ý: Code này vẫn xài ArrayList<String>, chỉ mới dọn sơ
 import java.util.*;
 import java.io.*;
+import java.text.*;
 
 
 
@@ -9,9 +10,8 @@ import java.util.ArrayList;
 
 class Student
 {
-
     print("Hello from nhanh2 branch");
-    String id;
+    int id;
     String name;
     int age;
     double gpa;
