@@ -9,9 +9,8 @@ import java.util.ArrayList;
 
 class Student
 {
-
     print("Hello from nhanh2 branch");
-    String id;
+    int id;
     String name;
     int age;
     double gpa;
@@ -242,4 +241,3 @@ System.out.println("4. Hien thi tat ca SV");
         }
     }
 }
-envgosnosnvs
