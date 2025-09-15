@@ -5,10 +5,11 @@ import java.util.*;
 
 class Student
 {
-    String id;
+    int id;
     String name;
     int age;
     double gpa;
+
 
     public Student(String id, String name, int age, double gpa) {
         this.id = id;
